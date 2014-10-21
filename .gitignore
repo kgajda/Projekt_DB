@@ -1,0 +1,17 @@
+
+.idea
+Projekt_DB.iml
+.idea/libraries
+.idea/vcs.xml
+.idea/modules.xml
+.idea/workspace.xml
+.idea/encodings.xml
+.idea/gradle.xml
+.idea/compiler.xml
+.idea/.name
+.idea/scopes
+.idea/copyright
+.idea/misc.xml
+.idea/copyright/profiles_settings.xml
+.idea/libraries/Gradle__junit_4_11.xml
+.idea/libraries/Gradle__hamcrest_core_1_3.xml
