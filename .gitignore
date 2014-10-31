@@ -15,3 +15,4 @@ Projekt_DB.iml
 .idea/copyright/profiles_settings.xml
 .idea/libraries/Gradle__junit_4_11.xml
 .idea/libraries/Gradle__hamcrest_core_1_3.xml
+transaction.log
