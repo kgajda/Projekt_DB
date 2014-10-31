@@ -35,7 +35,7 @@ public class DbConfiguration {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setHibernateProperties(hibernateProperties());
-        sessionFactory.setPackagesToScan("com.kiwipowered.kiwiwebapi.domain");
+        sessionFactory.setPackagesToScan("pl.agh.projekt.db.orm");
         sessionFactory.afterPropertiesSet();
         return sessionFactory.getObject();
     }
