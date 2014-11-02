@@ -26,7 +26,7 @@ public class CategoriesController {
     private ObjectMapper objectMapper;
     private static final Logger LOGGER = LoggerFactory.getLogger(CategoriesController.class);
 
-    @RequestMapping(name = "/categories", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/categories", method = RequestMethod.GET, produces = "application/json")
     public String getCategories() {
         List<Categories> categorieses = cattegoriesManager.getAllCategories();
         try {

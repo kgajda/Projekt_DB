@@ -23,7 +23,7 @@ public class CategoriesDAOImpl implements CategoriesDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public List<Categories> findAll() {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Categories.class);
