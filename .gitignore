@@ -17,3 +17,7 @@ Projekt_DB.iml
 .idea/libraries/Gradle__hamcrest_core_1_3.xml
 transaction.log
 gradlew.bat
+/.nb-gradle/private/
+/out/
+/hs_err_pid10738.log
+/replay_pid10705.log

@@ -4,6 +4,7 @@ apply plugin: 'war'
 sourceCompatibility = 1.8
 version = '1.0'
 
+
 repositories {
     mavenLocal()
     mavenCentral()
@@ -37,4 +38,31 @@ dependencies {
     testCompile 'org.springframework:spring-test:4.1.1.RELEASE'
     testCompile 'com.github.springtestdbunit:spring-test-dbunit:1.1.0'
     testCompile 'org.dbunit:dbunit:2.5.0'
+}
+
+task tomcatDebug {
+   // Create a new task tomcatDebug, add a description and add it to the same group as tomcatRun
+   description "Starting Tomcat with debugger enabled on port 5008."
+   group "web application"
+} << {
+ 
+   org.gradle.tooling.ProjectConnection conn = org.gradle.tooling.GradleConnector.newConnector()
+      .forProjectDirectory(new File("."))
+      .connect();
+ 
+   try {
+ 
+      org.gradle.tooling.model.build.BuildEnvironment env = conn.getModel(org.gradle.tooling.model.build.BuildEnvironment.class)
+      org.gradle.tooling.BuildLauncher build = conn.newBuild();
+  
+      build.forTasks("tomcatRun")
+      // Enable debug via jvm arguments and append JVM arguments of the currently running vm (except -D).
+      build.setJvmArguments("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5008", *env.java.jvmArguments)
+ 
+      // Run tomcatRun in the new JVM with debug parameters
+      build.run()
+ 
+   } finally {
+      conn.close();
+   }
 }
