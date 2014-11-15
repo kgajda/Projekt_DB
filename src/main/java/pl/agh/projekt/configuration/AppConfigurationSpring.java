@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Import;
 @ComponentScan(basePackages ={
         "pl.agh.projekt.db.dao",
         "pl.agh.projekt.service",
+        "pl.agh.projekt.untils"
 })
 @Import(DbConfiguration.class)
 public class AppConfigurationSpring {

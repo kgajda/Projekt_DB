@@ -7,25 +7,22 @@ package pl.agh.projekt.web.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.IOException;
-import java.util.List;
-import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
 import pl.agh.projekt.db.orm.Orders;
 import pl.agh.projekt.service.OrdersManager;
+import pl.agh.projekt.untils.loggers.NewRequestLogger;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.List;
 
 /**
- *
- * @author karol
+ * @author michal
  */
 @RequestMapping(value = "/orders")
 @RestController
@@ -34,45 +31,65 @@ public class OrdersController {
     private OrdersManager ordersManager;
     @Autowired
     private ObjectMapper objectMapper;
-    
+
     private static final Logger LOGGER = LoggerFactory.getLogger(CategoriesController.class);
-    
-    @RequestMapping(method = RequestMethod.GET,produces = "application/json")
-    public String getAllOrders(){
+
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
+    public String getAllOrders(HttpServletRequest httpServletRequest) {
+        NewRequestLogger newRequestLogger = new NewRequestLogger(httpServletRequest);
         List<Orders> orders = ordersManager.findAllOrfers();
+        String response = null;
         try {
-            return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(orders);
+            response = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(orders);
         } catch (JsonProcessingException e) {
             LOGGER.error(e.getMessage(), e.getCause());
+            newRequestLogger.setError(e.getMessage());
             throw new HttpServerErrorException(HttpStatus.EXPECTATION_FAILED);
         }
+        newRequestLogger.end();
+        return response;
     }
-    @RequestMapping(method = RequestMethod.POST,produces = "application/json")
-    public String insertOrders(@RequestBody String string){
+
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
+    public String insertOrders(@RequestBody String string, HttpServletRequest httpServletRequest) {
+        NewRequestLogger newRequestLogger = new NewRequestLogger(httpServletRequest, string);
+        String id;
         try {
-            LOGGER.info("Message: "+string);
             Orders order = objectMapper.readValue(string, Orders.class);
-            int id = ordersManager.insertToDB(order);
-            return String.valueOf(id);
+            int i = ordersManager.insertToDB(order);
+            id = String.valueOf(i);
+            newRequestLogger.setResponse(id);
         } catch (IOException ex) {
+            newRequestLogger.setError(ex.getMessage());
             LOGGER.error(ex.getMessage(), ex);
             return ex.getMessage();
         }
+        newRequestLogger.end();
+        return id;
     }
-    
-    @RequestMapping(value = "/{id}",method = RequestMethod.GET,produces = "application/json")
-    public String getOrder(@PathVariable("id") String id){
-        Orders prder = ordersManager.findByID(Integer.valueOf(id));
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
+    public String getOrder(@PathVariable("id") String id, HttpServletRequest httpServletRequest) {
+        NewRequestLogger newRequestLogger = new NewRequestLogger(httpServletRequest);
+        Orders order = ordersManager.findByID(Integer.valueOf(id));
+        String response = null;
         try {
-            return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(prder);
+            response = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(order);
         } catch (JsonProcessingException e) {
             LOGGER.error(e.getMessage(), e.getCause());
+            newRequestLogger.setError(e.getMessage());
             throw new HttpServerErrorException(HttpStatus.EXPECTATION_FAILED);
         }
+        newRequestLogger.end();
+        return response;
     }
-    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE,produces = "application/json")
-    public void deleteOrder(@PathVariable("id") String id){
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")
+    public void deleteOrder(@PathVariable("id") String id, HttpServletRequest httpServletRequest) {
+        NewRequestLogger newRequestLogger = new NewRequestLogger(httpServletRequest, id);
         ordersManager.delete(Integer.valueOf(id));
+        newRequestLogger.end();
+
     }
-    
+
 }
