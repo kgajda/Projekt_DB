@@ -23,7 +23,7 @@ public class CategoriesDAOImpl implements CategoriesDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public List<Categories> findAll() {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Categories.class);
@@ -42,6 +42,14 @@ public class CategoriesDAOImpl implements CategoriesDAO {
     @Override
     public void save(Categories categories) {
         sessionFactory.getCurrentSession().save(categories);
+    }
+
+    @Transactional
+    @Override
+    public void delete(int id) {
+        Query query = sessionFactory.getCurrentSession().createQuery("DELETE Categories WHERE CategoryID = :id");
+        query.setParameter("id", id);
+        query.executeUpdate();
     }
 
 }

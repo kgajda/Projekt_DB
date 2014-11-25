@@ -19,4 +19,12 @@ public class CattegoriesManager {
     public List<Categories> getAllCategories() {
         return categoriesDAO.findAll();
     }
+
+    public Categories getCategorie(int id) {
+        return categoriesDAO.findById(id);
+    }
+
+    public void delete(int id) {
+        categoriesDAO.delete(id);
+    }
 }

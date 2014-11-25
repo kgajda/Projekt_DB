@@ -3,10 +3,7 @@ package pl.agh.projekt.db.orm;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by karol on 31.10.14.
@@ -15,8 +12,9 @@ import javax.persistence.Table;
 @Table(name = "categories")
 public class Categories {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "CategoryID", length = 11, nullable = false)
-    private int categoryId;
+    private Integer categoryId;
     @Column(name = "CategoryName", length = 15)
     private String categoryName;
     @Column(name = "Description", columnDefinition = "TEXT")

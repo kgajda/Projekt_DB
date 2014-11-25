@@ -1,11 +1,12 @@
 package pl.agh.projekt.db.dao;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import pl.agh.projekt.db.orm.Employee;
+import pl.agh.projekt.db.orm.Employees;
 
 import java.util.List;
 
@@ -20,37 +21,39 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     @Transactional
-    public int insert(Employee employee) {
-        sessionFactory.getCurrentSession().save(employee);
-        return employee.getEmployeeID();
+    public int insert(Employees employees) {
+        sessionFactory.getCurrentSession().save(employees);
+        return employees.getEmployeeID();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Employee findByID(int id) {
+    public Employees findByID(int id) {
         Query query = sessionFactory.getCurrentSession().createQuery("FROM Employees WHERE EmployeeID = :id");
         query.setParameter("id", id);
-        return (Employee) query.uniqueResult();
+        return (Employees) query.uniqueResult();
 
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<Employee> getAllEmployeers() {
-        Query query = sessionFactory.getCurrentSession().createQuery("FROM Employees WHERE EmployeeID = :id");
-        return (List<Employee>) query.uniqueResult();
+    public List<Employees> getAllEmployeers() {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Employees.class);
+        return (List<Employees>) criteria.list();
     }
 
     @Override
     @Transactional
-    public void update(Employee employee) {
-        sessionFactory.getCurrentSession().update(employee);
+    public void update(Employees employees) {
+        sessionFactory.getCurrentSession().update(employees);
 
     }
 
     @Override
     @Transactional
     public void delete(int id) {
-        sessionFactory.getCurrentSession().createQuery("DELETE Employees WHERE EmployeeID = :id").executeUpdate();
+        Query query = sessionFactory.getCurrentSession().createQuery("DELETE Employees WHERE EmployeeID = :id");
+        query.setParameter("id", id);
+        query.executeUpdate();
     }
 }

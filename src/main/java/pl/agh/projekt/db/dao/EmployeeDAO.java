@@ -1,6 +1,6 @@
 package pl.agh.projekt.db.dao;
 
-import pl.agh.projekt.db.orm.Employee;
+import pl.agh.projekt.db.orm.Employees;
 
 import java.util.List;
 
@@ -8,13 +8,13 @@ import java.util.List;
  * Created by michal on 31.10.14.
  */
 public interface EmployeeDAO {
-    int insert(Employee employee);
+    int insert(Employees employees);
 
-    Employee findByID(int id);
+    Employees findByID(int id);
 
-    List<Employee> getAllEmployeers();
+    List<Employees> getAllEmployeers();
 
-    void update(Employee employee);
+    void update(Employees employees);
 
     void delete(int id);
 

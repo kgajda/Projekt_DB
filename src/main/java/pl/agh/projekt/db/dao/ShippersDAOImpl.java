@@ -28,7 +28,7 @@ public class ShippersDAOImpl implements ShippersDAO {
     @Override
     @Transactional(readOnly = true)
     public Shippers findByID(int id) {
-        Query query = sessionFactory.getCurrentSession().createQuery("FROM Shippers WHERE ShippersID = :id");
+        Query query = sessionFactory.getCurrentSession().createQuery("FROM Shippers WHERE ShipperID = :id");
         query.setParameter("id", id);
         return (Shippers) query.uniqueResult();
     }
@@ -50,7 +50,7 @@ public class ShippersDAOImpl implements ShippersDAO {
     @Override
     @Transactional
     public void delete(int id) {
-        Query query = sessionFactory.getCurrentSession().createQuery("DELETE Shippers WHERE ShippersID = :id");
+        Query query = sessionFactory.getCurrentSession().createQuery("DELETE Shippers WHERE ShipperID = :id");
         query.setParameter("id", id);
         query.executeUpdate();
     }

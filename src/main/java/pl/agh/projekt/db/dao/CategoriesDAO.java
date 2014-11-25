@@ -13,4 +13,6 @@ public interface CategoriesDAO {
     Categories findById(int id);
 
     void save(Categories categories);
+
+    void delete(int id);
 }

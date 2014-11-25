@@ -21,13 +21,13 @@ public class ProductsDAOImpl implements ProductsDAO {
     @Transactional
     public int insert(Products products) {
         sessionFactory.getCurrentSession().save(products);
-        return products.getCategoryId();
+        return products.getProductId();
     }
 
     @Override
     @Transactional(readOnly = true)
     public Products findByID(int id) {
-        Query query = sessionFactory.getCurrentSession().createQuery("FROM Products WHERE ProductsID = :id");
+        Query query = sessionFactory.getCurrentSession().createQuery("FROM Products WHERE ProductID = :id");
         query.setParameter("id", id);
         return (Products) query.uniqueResult();
     }
@@ -48,7 +48,7 @@ public class ProductsDAOImpl implements ProductsDAO {
     @Override
     @Transactional
     public void delete(int id) {
-        Query query = sessionFactory.getCurrentSession().createQuery("DELETE Products WHERE ProductsID = :id");
+        Query query = sessionFactory.getCurrentSession().createQuery("DELETE Products WHERE ProductID = :id");
         query.setParameter("id", id);
         query.executeUpdate();
     }

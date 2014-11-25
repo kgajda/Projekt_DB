@@ -1,9 +1,6 @@
 package pl.agh.projekt.db.orm;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by karol on 31.10.14.
@@ -12,6 +9,7 @@ import javax.persistence.Table;
 @Table(name = "shippers")
 public class Shippers {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ShipperID", length = 11, nullable = false)
     private int shipperId;
     @Column(name = "CompanyName", length = 40)

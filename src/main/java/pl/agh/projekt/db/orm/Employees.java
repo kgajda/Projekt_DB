@@ -1,9 +1,6 @@
 package pl.agh.projekt.db.orm;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -11,8 +8,9 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "employees")
-public class Employee {
+public class Employees {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "EmployeeID", unique = true, nullable = false, length = 10)
     private Integer employeeID;
     @Column(name = "LastName", length = 20)
@@ -48,7 +46,7 @@ public class Employee {
     @Column(name = "ReportsTo", length = 11)
     private Integer reportsTo;
 
-    public Employee() {
+    public Employees() {
     }
 
     public String getFirstName() {

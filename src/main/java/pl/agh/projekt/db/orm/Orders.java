@@ -1,9 +1,6 @@
 package pl.agh.projekt.db.orm;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -14,11 +11,12 @@ import java.util.Date;
 public class Orders {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "OrderID", nullable = false, length = 11)
     private Integer orderId;
-    @Column(name = "CustomerID", nullable = false, length = 5)
+    @Column(name = "CustomerID", length = 5)
     private String customerId;
-    @Column(name = "EmployeeID", nullable = false, length = 11)
+    @Column(name = "EmployeeID", length = 11)
     private Integer employeeId;
     @Column(name = "OrderDate")
     private Date orderDate;

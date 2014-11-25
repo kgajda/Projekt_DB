@@ -1,9 +1,6 @@
 package pl.agh.projekt.db.orm;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by karol on 31.10.14.
@@ -13,6 +10,7 @@ import javax.persistence.Table;
 public class Products {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ProductID", length = 11, nullable = false)
     private Integer productId;
     @Column(name = "ProductName", length = 40)

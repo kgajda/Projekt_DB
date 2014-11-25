@@ -5,7 +5,6 @@
  */
 package pl.agh.projekt.db.dao;
 
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +35,8 @@ public class OrdersDAOImpl implements OrdersDAO {
     @Override
     @Transactional(readOnly = true)
     public List<Orders> getAllOrders() {
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Orders.class);
-        return (List<Orders>) criteria.list();
+        Query query = sessionFactory.getCurrentSession().createQuery("FROM Orders");
+        return (List<Orders>) query.list();
     }
 
     @Override

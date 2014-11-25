@@ -3,7 +3,7 @@ package pl.agh.projekt.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.agh.projekt.db.dao.EmployeeDAO;
-import pl.agh.projekt.db.orm.Employee;
+import pl.agh.projekt.db.orm.Employees;
 
 import java.util.List;
 
@@ -16,12 +16,15 @@ public class EmployeeManager {
     @Autowired
     private EmployeeDAO employeeDAO;
 
-    public List<Employee> employeeList() {
+    public List<Employees> employeeList() {
         return employeeDAO.getAllEmployeers();
     }
 
-    public Employee getEmployee(int id) {
+    public Employees getEmployee(int id) {
         return employeeDAO.findByID(id);
     }
 
+    public void delete(int id) {
+        employeeDAO.delete(id);
+    }
 }
