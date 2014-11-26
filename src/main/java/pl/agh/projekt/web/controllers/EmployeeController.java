@@ -26,7 +26,7 @@ public class EmployeeController {
     private ObjectMapper objectMapper;
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public String getAllEmployees(HttpServletRequest httpServletRequest) {
+    public String getAllEmployees() {
         List<Employees> employeesList = employeeManager.employeeList();
         String jeson;
         try {
@@ -51,8 +51,8 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")
-    public void deleteEmployee(@PathVariable String id, HttpServletRequest httpServletRequest) {
-        employeeManager.delete(Integer.valueOf(id));
+    public String deleteEmployee(@PathVariable String id, HttpServletRequest httpServletRequest) {
+        return employeeManager.delete(Integer.valueOf(id));
     }
 
 

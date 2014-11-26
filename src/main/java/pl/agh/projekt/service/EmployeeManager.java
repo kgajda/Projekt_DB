@@ -24,7 +24,7 @@ public class EmployeeManager {
         return employeeDAO.findByID(id);
     }
 
-    public void delete(int id) {
-        employeeDAO.delete(id);
+    public String delete(int id) {
+        return String.valueOf(employeeDAO.delete(id));
     }
 }

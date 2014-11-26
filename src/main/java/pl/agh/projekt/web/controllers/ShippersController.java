@@ -80,10 +80,8 @@ public class ShippersController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")
-    public void deleteOrder(@PathVariable("id") String id, HttpServletRequest httpServletRequest) {
-        NewRequestLogger newRequestLogger = new NewRequestLogger(httpServletRequest, id);
-        shippersManager.delete(Integer.valueOf(id));
-        newRequestLogger.end();
+    public String deleteOrder(@PathVariable("id") String id, HttpServletRequest httpServletRequest) {
+        return shippersManager.delete(Integer.valueOf(id));
 
     }
 }

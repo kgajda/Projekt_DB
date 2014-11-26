@@ -16,5 +16,5 @@ public interface ShippersDAO {
 
     void update(Shippers shippers);
 
-    void delete(int id);
+    int delete(int id);
 }

@@ -6,7 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.HttpServerErrorException;
 import pl.agh.projekt.db.orm.Products;
 import pl.agh.projekt.service.ProductssManager;
@@ -19,8 +22,8 @@ import java.util.List;
 /**
  * Created by karol on 09.11.14.
  */
-@RestController
-@RequestMapping(value = "/products")
+//@RestController
+//@RequestMapping(value = "/products")
 public class ProductsController {
 
     @Autowired
@@ -81,10 +84,7 @@ public class ProductsController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")
-    public void deleteOrder(@PathVariable("id") String id, HttpServletRequest httpServletRequest) {
-        NewRequestLogger newRequestLogger = new NewRequestLogger(httpServletRequest, id);
-        productsManager.delete(Integer.valueOf(id));
-        newRequestLogger.end();
-
+    public String deleteOrder(@PathVariable("id") String id, HttpServletRequest httpServletRequest) {
+        return productsManager.delete(Integer.valueOf(id));
     }
 }

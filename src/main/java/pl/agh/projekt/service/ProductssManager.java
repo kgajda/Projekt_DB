@@ -27,7 +27,7 @@ public class ProductssManager {
         return productsDAO.findByID(id);
     }
 
-    public void delete(int id) {
-        productsDAO.delete(id);
+    public String delete(int id) {
+        return String.valueOf(productsDAO.delete(id));
     }
 }

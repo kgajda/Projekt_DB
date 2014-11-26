@@ -48,16 +48,17 @@ public class OrdersDAOImpl implements OrdersDAO {
 
     @Override
     @Transactional
-    public void update(Orders orders) {
+    public int update(Orders orders) {
         sessionFactory.getCurrentSession().update(orders);
+        return 1;
     }
 
     @Override
     @Transactional
-    public void delete(int id) {
+    public int delete(int id) {
         Query query = sessionFactory.getCurrentSession().createQuery("DELETE Orders WHERE OrderID = :id");
         query.setParameter("id", id);
-        query.executeUpdate();
+        return query.executeUpdate();
     }
 
 }

@@ -35,18 +35,15 @@ public class OrdersController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CategoriesController.class);
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public String getAllOrders(HttpServletRequest httpServletRequest) {
-        NewRequestLogger newRequestLogger = new NewRequestLogger(httpServletRequest);
+    public String getAllOrders() {
         List<Orders> orders = ordersManager.findAllOrfers();
         String response = null;
         try {
             response = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(orders);
         } catch (JsonProcessingException e) {
             LOGGER.error(e.getMessage(), e.getCause());
-            newRequestLogger.setError(e.getMessage());
             throw new HttpServerErrorException(HttpStatus.EXPECTATION_FAILED);
         }
-        newRequestLogger.end();
         return response;
     }
 
@@ -70,25 +67,33 @@ public class OrdersController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     public String getOrder(@PathVariable("id") String id, HttpServletRequest httpServletRequest) {
-        NewRequestLogger newRequestLogger = new NewRequestLogger(httpServletRequest);
         Orders order = ordersManager.findByID(Integer.valueOf(id));
         String response = null;
         try {
             response = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(order);
         } catch (JsonProcessingException e) {
             LOGGER.error(e.getMessage(), e.getCause());
-            newRequestLogger.setError(e.getMessage());
             throw new HttpServerErrorException(HttpStatus.EXPECTATION_FAILED);
         }
-        newRequestLogger.end();
         return response;
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = "application/json")
+    public String updateOrder(@PathVariable("id") String id, @RequestBody String json) {
+        try {
+            Orders orders = objectMapper.readValue(json, Orders.class);
+            orders.setOrderId(Integer.valueOf(id));
+            return ordersManager.update(orders);
+        } catch (IOException e) {
+            LOGGER.error(e.getMessage(), e.getCause());
+            throw new HttpServerErrorException(HttpStatus.EXPECTATION_FAILED);
+        }
+
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")
-    public void deleteOrder(@PathVariable("id") String id, HttpServletRequest httpServletRequest) {
-        NewRequestLogger newRequestLogger = new NewRequestLogger(httpServletRequest, id);
-        ordersManager.delete(Integer.valueOf(id));
-        newRequestLogger.end();
+    public String deleteOrder(@PathVariable("id") String id, HttpServletRequest httpServletRequest) {
+        return ordersManager.delete(Integer.valueOf(id));
 
     }
 

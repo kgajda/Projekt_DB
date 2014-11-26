@@ -11,7 +11,9 @@ public interface OrdersDAO {
     int insert(Orders orders);
     Orders findByID(int id);
     List<Orders> getAllOrders();
-    void update(Orders orders);
-    void delete(int orders);
+
+    int update(Orders orders);
+
+    int delete(int orders);
     
 }

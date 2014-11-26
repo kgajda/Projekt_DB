@@ -49,9 +49,9 @@ public class ShippersDAOImpl implements ShippersDAO {
 
     @Override
     @Transactional
-    public void delete(int id) {
+    public int delete(int id) {
         Query query = sessionFactory.getCurrentSession().createQuery("DELETE Shippers WHERE ShipperID = :id");
         query.setParameter("id", id);
-        query.executeUpdate();
+        return query.executeUpdate();
     }
 }

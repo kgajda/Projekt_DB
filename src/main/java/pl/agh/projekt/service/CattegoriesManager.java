@@ -24,7 +24,15 @@ public class CattegoriesManager {
         return categoriesDAO.findById(id);
     }
 
-    public void delete(int id) {
-        categoriesDAO.delete(id);
+    public String delete(int id) {
+        return String.valueOf(categoriesDAO.delete(id));
+    }
+
+    public void update(Categories categories) {
+        categoriesDAO.update(categories);
+    }
+
+    public String insert(Categories categories) {
+        return String.valueOf(categoriesDAO.save(categories));
     }
 }

@@ -12,7 +12,9 @@ public interface CategoriesDAO {
 
     Categories findById(int id);
 
-    void save(Categories categories);
+    Integer save(Categories categories);
 
-    void delete(int id);
+    int delete(int id);
+
+    void update(Categories categories);
 }

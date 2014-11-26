@@ -47,9 +47,9 @@ public class ProductsDAOImpl implements ProductsDAO {
 
     @Override
     @Transactional
-    public void delete(int id) {
+    public int delete(int id) {
         Query query = sessionFactory.getCurrentSession().createQuery("DELETE Products WHERE ProductID = :id");
         query.setParameter("id", id);
-        query.executeUpdate();
+        return query.executeUpdate();
     }
 }

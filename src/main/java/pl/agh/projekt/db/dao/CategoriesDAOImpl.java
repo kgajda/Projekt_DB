@@ -40,16 +40,23 @@ public class CategoriesDAOImpl implements CategoriesDAO {
 
     @Transactional
     @Override
-    public void save(Categories categories) {
+    public Integer save(Categories categories) {
         sessionFactory.getCurrentSession().save(categories);
+        return categories.getCategoryId();
     }
 
     @Transactional
     @Override
-    public void delete(int id) {
+    public int delete(int id) {
         Query query = sessionFactory.getCurrentSession().createQuery("DELETE Categories WHERE CategoryID = :id");
         query.setParameter("id", id);
-        query.executeUpdate();
+        return query.executeUpdate();
+    }
+
+    @Transactional
+    @Override
+    public void update(Categories categories) {
+        sessionFactory.getCurrentSession().update(categories);
     }
 
 }

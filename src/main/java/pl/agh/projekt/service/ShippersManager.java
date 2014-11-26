@@ -27,7 +27,7 @@ public class ShippersManager {
         return shippersDAO.findByID(integer);
     }
 
-    public void delete(Integer integer) {
-        shippersDAO.delete(integer);
+    public String delete(Integer integer) {
+        return String.valueOf(shippersDAO.delete(integer));
     }
 }

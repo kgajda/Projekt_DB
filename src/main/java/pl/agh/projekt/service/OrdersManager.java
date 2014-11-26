@@ -5,11 +5,12 @@
  */
 package pl.agh.projekt.service;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.agh.projekt.db.dao.OrdersDAO;
 import pl.agh.projekt.db.orm.Orders;
+
+import java.util.List;
 
 /**
  *
@@ -32,11 +33,12 @@ public class OrdersManager {
     public int insertToDB(Orders orders){
        return ordersDAO.insert(orders);
     }
-    
-    public void update(Orders orders){
-        ordersDAO.insert(orders);
+
+    public String update(Orders orders) {
+        return String.valueOf(ordersDAO.update(orders));
     }
-    public void delete(int id){
-        ordersDAO.delete(id);
+
+    public String delete(int id) {
+        return String.valueOf(ordersDAO.delete(id));
     }
 }
