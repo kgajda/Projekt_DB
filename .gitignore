@@ -22,5 +22,6 @@ gradlew.bat
 /hs_err_pid10738.log
 /replay_pid10705.log
 .gradle
-build
+build/*
 out
+build
