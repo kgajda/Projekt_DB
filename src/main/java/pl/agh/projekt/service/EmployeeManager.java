@@ -27,4 +27,12 @@ public class EmployeeManager {
     public String delete(int id) {
         return String.valueOf(employeeDAO.delete(id));
     }
+
+    public void update(Employees employee) {
+        employeeDAO.update(employee);
+    }
+
+    public String save(Employees employee) {
+        return String.valueOf(employeeDAO.insert(employee));
+    }
 }

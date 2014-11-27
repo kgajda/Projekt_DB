@@ -19,8 +19,8 @@ public class ShippersManager {
         return shippersDAO.getAllShippers();
     }
 
-    public int insertToDB(Shippers order) {
-        return shippersDAO.insert(order);
+    public String insertToDB(Shippers order) {
+        return String.valueOf(shippersDAO.insert(order));
     }
 
     public Shippers findByID(int integer) {
@@ -29,5 +29,9 @@ public class ShippersManager {
 
     public String delete(Integer integer) {
         return String.valueOf(shippersDAO.delete(integer));
+    }
+
+    public void update(Shippers shippers) {
+        shippersDAO.update(shippers);
     }
 }

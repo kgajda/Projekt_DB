@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
 import pl.agh.projekt.db.orm.Shippers;
 import pl.agh.projekt.service.ShippersManager;
-import pl.agh.projekt.untils.loggers.NewRequestLogger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -31,52 +30,51 @@ public class ShippersController {
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public String getAllOrders(HttpServletRequest httpServletRequest) {
-        NewRequestLogger newRequestLogger = new NewRequestLogger(httpServletRequest);
         List<Shippers> orders = shippersManager.findAllOrfers();
         String response = null;
         try {
             response = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(orders);
         } catch (JsonProcessingException e) {
             LOGGER.error(e.getMessage(), e.getCause());
-            newRequestLogger.setError(e.getMessage());
             throw new HttpServerErrorException(HttpStatus.EXPECTATION_FAILED);
         }
-        newRequestLogger.end();
         return response;
-    }
-
-    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
-    public String insertOrders(@RequestBody String string, HttpServletRequest httpServletRequest) {
-        NewRequestLogger newRequestLogger = new NewRequestLogger(httpServletRequest, string);
-        String id;
-        try {
-            Shippers order = objectMapper.readValue(string, Shippers.class);
-            int i = shippersManager.insertToDB(order);
-            id = String.valueOf(i);
-            newRequestLogger.setResponse(id);
-        } catch (IOException ex) {
-            newRequestLogger.setError(ex.getMessage());
-            LOGGER.error(ex.getMessage(), ex);
-            return ex.getMessage();
-        }
-        newRequestLogger.end();
-        return id;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     public String getOrder(@PathVariable("id") String id, HttpServletRequest httpServletRequest) {
-        NewRequestLogger newRequestLogger = new NewRequestLogger(httpServletRequest);
         Shippers order = shippersManager.findByID(Integer.valueOf(id));
         String response = null;
         try {
             response = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(order);
         } catch (JsonProcessingException e) {
             LOGGER.error(e.getMessage(), e.getCause());
-            newRequestLogger.setError(e.getMessage());
             throw new HttpServerErrorException(HttpStatus.EXPECTATION_FAILED);
         }
-        newRequestLogger.end();
         return response;
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = "application/json")
+    public String updateOrder(@PathVariable("id") String id, @RequestBody String json) {
+        try {
+            Shippers shippers = objectMapper.readValue(json, Shippers.class);
+            shippers.setShipperId(Integer.valueOf(id));
+            shippersManager.update(shippers);
+            return "ok";
+        } catch (IOException e) {
+            return e.getMessage();
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
+    public String insert(@RequestBody String json) {
+        try {
+            Shippers shippers = objectMapper.readValue(json, Shippers.class);
+            return shippersManager.insertToDB(shippers);
+
+        } catch (IOException e) {
+            return e.getMessage();
+        }
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")

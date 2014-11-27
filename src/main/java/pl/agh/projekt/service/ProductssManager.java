@@ -30,4 +30,12 @@ public class ProductssManager {
     public String delete(int id) {
         return String.valueOf(productsDAO.delete(id));
     }
+
+    public void update(Products products) {
+        productsDAO.update(products);
+    }
+
+    public String save(Products products) {
+        return String.valueOf(productsDAO.insert(products));
+    }
 }
