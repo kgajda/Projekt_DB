@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import pl.agh.projekt.db.orm.CompanyOrders;
 import pl.agh.projekt.db.orm.Orders;
 
 import java.util.List;
@@ -60,5 +61,15 @@ public class OrdersDAOImpl implements OrdersDAO {
         query.setParameter("id", id);
         return query.executeUpdate();
     }
+
+    @Override
+    @Transactional
+    public List<CompanyOrders> selectCO() {
+        String s = "SELECT  new pl.agh.projekt.db.orm.CompanyOrders(c.companyName,  COUNT(o.orderId))" +
+                " FROM Orders o JOIN o.customer c" +
+                " GROUP BY c.customerID";
+        return (List<CompanyOrders>) sessionFactory.getCurrentSession().createQuery(s).list();
+    }
+
 
 }

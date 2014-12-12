@@ -8,6 +8,7 @@ package pl.agh.projekt.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.agh.projekt.db.dao.OrdersDAO;
+import pl.agh.projekt.db.orm.CompanyOrders;
 import pl.agh.projekt.db.orm.Orders;
 
 import java.util.List;
@@ -41,4 +42,10 @@ public class OrdersManager {
     public String delete(int id) {
         return String.valueOf(ordersDAO.delete(id));
     }
+
+    public List<CompanyOrders> selectCO() {
+        return ordersDAO.selectCO();
+    }
+
+    ;
 }

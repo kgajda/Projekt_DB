@@ -72,22 +72,18 @@
     <orderEntry type="library" exported="" name="Gradle: net.sf.ehcache:ehcache-core:2.6.9" level="project" />
     <orderEntry type="library" exported="" name="Gradle: cglib:cglib:3.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.ow2.asm:asm:4.2" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.springframework.data:spring-data-mongodb:1.6.1.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.hibernate:hibernate-ehcache:4.3.7.Final" level="project" />
     <orderEntry type="library" exported="" name="Gradle: com.jolbox:bonecp:0.8.0.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.postgresql:postgresql:9.3-1102-jdbc41" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.springframework.data:spring-data-commons:1.9.1.RELEASE" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.mongodb:mongo-java-driver:2.12.3" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.slf4j:jcl-over-slf4j:1.7.7" level="project" />
     <orderEntry type="library" exported="" name="Gradle: com.google.guava:guava:15.0" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-core:4.1.2.RELEASE" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-context:4.1.2.RELEASE" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-aop:4.1.2.RELEASE" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-orm:4.1.2.RELEASE" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-jdbc:4.1.2.RELEASE" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-beans:4.1.2.RELEASE" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-expression:4.1.2.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.hibernate:hibernate-core:4.3.7.Final" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-tx:4.1.2.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-core:4.1.1.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-context:4.1.1.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-aop:4.1.1.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-orm:4.1.1.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-beans:4.1.1.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-expression:4.1.1.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-jdbc:4.1.1.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-tx:4.1.1.RELEASE" level="project" />
   </component>
 </module>

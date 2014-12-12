@@ -1,5 +1,6 @@
 package pl.agh.projekt.db.dao;
 
+import pl.agh.projekt.db.orm.CompanyOrders;
 import pl.agh.projekt.db.orm.Orders;
 
 import java.util.List;
@@ -15,5 +16,7 @@ public interface OrdersDAO {
     int update(Orders orders);
 
     int delete(int orders);
+
+    List<CompanyOrders> selectCO();
     
 }

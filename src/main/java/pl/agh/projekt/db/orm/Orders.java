@@ -1,5 +1,7 @@
 package pl.agh.projekt.db.orm;
 
+import org.hibernate.annotations.Fetch;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -14,8 +16,10 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "OrderID", nullable = false, length = 11)
     private Integer orderId;
-    @Column(name = "CustomerID", length = 5)
-    private String customerId;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "CustomerID")
+    @Fetch(org.hibernate.annotations.FetchMode.JOIN)
+    private Customer customer;
     @Column(name = "EmployeeID", length = 11)
     private Integer employeeId;
     @Column(name = "OrderDate")
@@ -52,12 +56,12 @@ public class Orders {
         this.orderId = orderId;
     }
 
-    public String getCustomerId() {
-        return customerId;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
+    public void setCustomerId(Customer customer) {
+        this.customer = customer;
     }
 
     public Integer getEmployeeId() {

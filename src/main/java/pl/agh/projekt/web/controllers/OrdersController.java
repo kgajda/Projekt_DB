@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
+import pl.agh.projekt.db.orm.CompanyOrders;
 import pl.agh.projekt.db.orm.Orders;
 import pl.agh.projekt.service.OrdersManager;
 import pl.agh.projekt.untils.loggers.NewRequestLogger;
@@ -94,6 +95,20 @@ public class OrdersController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")
     public String deleteOrder(@PathVariable("id") String id, HttpServletRequest httpServletRequest) {
         return ordersManager.delete(Integer.valueOf(id));
+
+    }
+
+    @RequestMapping(value = "/raport", method = RequestMethod.GET, produces = "application/json")
+    public String raport() {
+        List<CompanyOrders> order = ordersManager.selectCO();
+        String response = null;
+        try {
+            response = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(order);
+        } catch (JsonProcessingException e) {
+            LOGGER.error(e.getMessage(), e.getCause());
+            throw new HttpServerErrorException(HttpStatus.EXPECTATION_FAILED);
+        }
+        return response;
 
     }
 
