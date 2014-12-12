@@ -10,7 +10,6 @@ import pl.agh.projekt.configuration.DispatcherConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
-
 /**
  * Created by karol on 01.11.14.
  */
@@ -21,16 +20,13 @@ public class WebInitializer implements WebApplicationInitializer {
         AnnotationConfigWebApplicationContext rootContext =
                 new AnnotationConfigWebApplicationContext();
         rootContext.register(AppConfigurationSpring.class);
-
-        // Manage the lifecycle of the root application context
+// Manage the lifecycle of the root application context
         container.addListener(new ContextLoaderListener(rootContext));
-
-        // Create the dispatcher servlet's Spring application context
+// Create the dispatcher servlet's Spring application context
         AnnotationConfigWebApplicationContext dispatcherContext =
                 new AnnotationConfigWebApplicationContext();
         dispatcherContext.register(DispatcherConfig.class);
-
-        // Register and map the dispatcher servlet
+// Register and map the dispatcher servlet
         ServletRegistration.Dynamic dispatcher =
                 container.addServlet("dispatcher", new DispatcherServlet(dispatcherContext));
         dispatcher.setLoadOnStartup(1);

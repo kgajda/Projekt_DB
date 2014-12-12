@@ -20,7 +20,7 @@ import java.util.Properties;
 public class DbConfiguration {
 
     @Bean(destroyMethod = "close")
-    public DataSource dataSource(){
+    public DataSource dataSource() {
         HikariDataSource hikariDataSource = new HikariDataSource();
         hikariDataSource.setMaximumPoolSize(50);
         hikariDataSource.setUsername("root");
@@ -43,7 +43,12 @@ public class DbConfiguration {
     private Properties hibernateProperties() {
         final Properties properties = new Properties();
         properties.put("hibernate.show_sql", "true");
+        properties.put("hibernate.generate_statistics", "true");
         properties.put("hibernate.hbm2ddl.auto", "validate");
+        properties.put("hibernate.cache.use_second_level_cache", "true");
+        properties.put("hibernate.cache.use_query_cache", "true");
+        properties.put("hibernate.cache.region.factory_class", "org.hibernate.cache.ehcache.EhCacheRegionFactory");
+        properties.put("net.sf.ehcache.configurationResourceName", "ehcache.xml");
         return properties;
     }
 
@@ -53,5 +58,6 @@ public class DbConfiguration {
         transactionManager.setSessionFactory(sessionFactory());
         return transactionManager;
     }
+
 
 }
