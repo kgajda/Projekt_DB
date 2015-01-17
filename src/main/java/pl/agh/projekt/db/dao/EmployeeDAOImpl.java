@@ -39,6 +39,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     @Transactional(readOnly = true)
     public List<Employees> getAllEmployeers() {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Employees.class);
+        criteria.setFirstResult(5);
+        criteria.setMaxResults(10);
         return (List<Employees>) criteria.list();
     }
 

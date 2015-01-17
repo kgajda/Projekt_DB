@@ -1,7 +1,25 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.9.RELEASE")
+    }
+}
+
 apply plugin: 'java'
-apply plugin: 'war'
+apply plugin: "idea"
+apply plugin: "spring-boot"
 
 sourceCompatibility = 1.8
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        if (details.requested.group == 'org.apache.tomcat.embed') {
+            details.useVersion '8.0.15'
+        }
+    }
+}
 version = '1.0'
 
 
@@ -19,6 +37,13 @@ dependencies {
     compile 'org.springframework:spring-web:4.1.1.RELEASE'
     compile 'org.springframework:spring-aop:4.1.1.RELEASE'
     compile 'org.springframework:spring-orm:4.1.1.RELEASE'
+    compile 'org.springframework:spring-context-support:4.1.1.RELEASE'
+    compile('org.springframework.boot:spring-boot-starter-actuator:1.1.9.RELEASE') {
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-logging"
+    }
+    compile('org.springframework.boot:spring-boot-starter-web:1.1.9.RELEASE') {
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-logging"
+    }
 
     //Hibernate
     compile 'org.hibernate:hibernate-core:4.3.6.Final'
@@ -55,29 +80,6 @@ dependencies {
     testCompile 'org.dbunit:dbunit:2.5.0'
 }
 
-task tomcatDebug {
-   // Create a new task tomcatDebug, add a description and add it to the same group as tomcatRun
-   description "Starting Tomcat with debugger enabled on port 5008."
-   group "web application"
-} << {
- 
-   org.gradle.tooling.ProjectConnection conn = org.gradle.tooling.GradleConnector.newConnector()
-      .forProjectDirectory(new File("."))
-      .connect();
- 
-   try {
- 
-      org.gradle.tooling.model.build.BuildEnvironment env = conn.getModel(org.gradle.tooling.model.build.BuildEnvironment.class)
-      org.gradle.tooling.BuildLauncher build = conn.newBuild();
-  
-      build.forTasks("tomcatRun")
-      // Enable debug via jvm arguments and append JVM arguments of the currently running vm (except -D).
-      build.setJvmArguments("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5008", *env.java.jvmArguments)
- 
-      // Run tomcatRun in the new JVM with debug parameters
-      build.run()
- 
-   } finally {
-      conn.close();
-   }
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2.1'
 }

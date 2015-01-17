@@ -49,6 +49,8 @@ public class DbConfiguration {
         properties.put("hibernate.cache.use_query_cache", "true");
         properties.put("hibernate.cache.region.factory_class", "org.hibernate.cache.ehcache.EhCacheRegionFactory");
         properties.put("net.sf.ehcache.configurationResourceName", "ehcache.xml");
+        properties.put("hibernate.cache.use_structured_entries", "true");
+        properties.put("hibernate.cache.provider_class", "net.sf.ehcache.hibernate.SingletonEhCacheProvider");
         return properties;
     }
 

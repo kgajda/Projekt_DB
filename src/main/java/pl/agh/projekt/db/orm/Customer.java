@@ -18,6 +18,8 @@ public class Customer {
     private String contactName;
     @Column(name = "ContactTitle")
     private String contactTitle;
+    @Version
+    private long vesrion;
 
     public Customer() {
     }
@@ -60,4 +62,11 @@ public class Customer {
         this.contactTitle = contactTitle;
     }
 
+    public long getVesrion() {
+        return vesrion;
+    }
+
+    public void setVesrion(long vesrion) {
+        this.vesrion = vesrion;
+    }
 }

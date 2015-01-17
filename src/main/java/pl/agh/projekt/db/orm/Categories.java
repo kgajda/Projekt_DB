@@ -5,14 +5,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by karol on 31.10.14.
  */
 @Entity
 @Table(name = "categories")
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
-public class Categories {
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "categories")
+public class Categories implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "CategoryID", length = 11, nullable = false)

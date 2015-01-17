@@ -49,16 +49,18 @@ public class EmployeesDAOImplTest {
     @Test
     public void testFindByID() throws Exception {
         Employees employees = employeeDAO.findByID(current);
+        Employees employees2 = employeeDAO.findByID(current);
         assertEquals("alibaba", employees.getLastName());
+        assertEquals("alibaba", employees2.getLastName());
     }
 
-    @Test
+    //    @Test
     public void testGetAllEmployeers() throws Exception {
         List<Employees> employeesList = employeeDAO.getAllEmployeers();
         assertFalse(employeesList.isEmpty());
     }
 
-    @Test
+    //    @Test
     public void testUpdate() throws Exception {
         Employees employees = employeeDAO.findByID(current);
         employees.setAddress("test2");

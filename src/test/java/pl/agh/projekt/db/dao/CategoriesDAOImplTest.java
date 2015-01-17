@@ -35,7 +35,7 @@ public class CategoriesDAOImplTest {
         testDelete();
     }
 
-    @Test
+    //    @Test
     public void testFindAll() throws Exception {
         List<Categories> categoriesList = categoriesDAO.findAll();
         assertTrue(!categoriesList.isEmpty());
@@ -44,7 +44,9 @@ public class CategoriesDAOImplTest {
     @Test
     public void testFindById() throws Exception {
         Categories categories = categoriesDAO.findById(current);
+        Categories categories2 = categoriesDAO.findById(current);
         assertEquals("test2", categories.getCategoryName());
+        assertEquals("test2", categories2.getCategoryName());
     }
 
 

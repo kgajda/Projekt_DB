@@ -33,9 +33,9 @@ public class CategoriesDAOImpl implements CategoriesDAO {
     @Transactional(readOnly = true)
     @Override
     public Categories findById(int id) {
-        Query query = sessionFactory.getCurrentSession().createQuery("from Categories where categoryId = :id");
-        query.setParameter("id", id);
-        return (Categories) query.uniqueResult();
+
+        Categories c = (Categories) sessionFactory.getCurrentSession().get(Categories.class, new Integer(id));
+        return c;
     }
 
     @Transactional
