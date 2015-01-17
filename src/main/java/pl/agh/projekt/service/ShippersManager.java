@@ -8,7 +8,7 @@ import pl.agh.projekt.db.orm.Shippers;
 import java.util.List;
 
 /**
- * Created by szczepan on 09.11.14.
+ * Created by michal on 09.11.14.
  */
 @Service
 public class ShippersManager {

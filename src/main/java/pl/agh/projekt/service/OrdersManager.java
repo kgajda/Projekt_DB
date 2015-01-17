@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  *
- * @author karol
+ * @author szczepan
  */
 @Service
 public class OrdersManager {

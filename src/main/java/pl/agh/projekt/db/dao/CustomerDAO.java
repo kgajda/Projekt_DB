@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.agh.projekt.db.orm.Customer;
 
 /**
- * Created by karol on 13.12.14.
+ * Created by michal on 13.12.14.
  */
 @Repository
 public class CustomerDAO {

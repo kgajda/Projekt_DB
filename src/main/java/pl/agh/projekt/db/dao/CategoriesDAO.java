@@ -5,7 +5,7 @@ import pl.agh.projekt.db.orm.Categories;
 import java.util.List;
 
 /**
- * Created by karol on 31.10.14.
+ * Created by szczepan on 31.10.14.
  */
 public interface CategoriesDAO {
     List<Categories> findAll();

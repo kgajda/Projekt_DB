@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by karol on 01.11.14.
+ * Created by szczepan on 01.11.14.
  */
 @RestController
 @RequestMapping(value = "/categories")

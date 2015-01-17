@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by karol on 08.11.14.
+ * Created by michal on 08.11.14.
  */
 @RestController
 @RequestMapping(value = "/employee")

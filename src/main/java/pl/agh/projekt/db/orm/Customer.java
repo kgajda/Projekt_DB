@@ -3,7 +3,7 @@ package pl.agh.projekt.db.orm;
 import javax.persistence.*;
 
 /**
- * Created by karol on 12.12.14.
+ * Created by michal on 12.12.14.
  */
 @Entity
 @Table(name = "customers")

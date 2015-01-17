@@ -1,7 +1,7 @@
 package pl.agh.projekt.db.orm;
 
 /**
- * Created by karol on 12.12.14.
+ * Created by szczepan on 12.12.14.
  */
 public class CompanyOrders {
 

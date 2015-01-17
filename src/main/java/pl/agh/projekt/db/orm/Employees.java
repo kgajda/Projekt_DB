@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Created by karol on 22.10.14.
+ * Created by michal on 22.10.14.
  */
 @Entity
 @Table(name = "employees")

@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Created by karol on 31.10.14.
+ * Created by michal on 31.10.14.
  */
 @Entity
 @Table(name = "order_details")
